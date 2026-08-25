@@ -1,0 +1,94 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+from sklearn.datasets import load_iris
+from sklearn.linear_model import Perceptron
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
+
+# Load dataset
+iris = load_iris()
+
+X = iris.data
+y = iris.target
+
+
+# Display first five rows
+df = pd.DataFrame(X, columns=iris.feature_names)
+df["Target"] = y
+
+print(df.head())
+
+
+# Convert to binary classification
+# Class 0 (Setosa) = 1, all other classes = 0
+y = (y == 0).astype(int)
+
+
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=42
+)
+
+
+# Create Perceptron model
+model = Perceptron(
+    max_iter=1000,
+    eta0=0.1,
+    random_state=42
+)
+
+
+# Train the model
+model.fit(X_train, y_train)
+
+
+# Make predictions
+y_pred = model.predict(X_test)
+
+
+# Accuracy
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+
+
+# Predictions
+print("\nPredicted Values:")
+print(y_pred)
+
+print("\nActual Values:")
+print(y_test)
+
+
+# Confusion Matrix
+cm = confusion_matrix(y_test, y_pred)
+
+print("\nConfusion Matrix:")
+print(cm)
+
+
+# Classification Report
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
+
+# Visualize Confusion Matrix
+plt.figure(figsize=(8, 6))
+
+sns.heatmap(
+    cm,
+    annot=True,
+    fmt="d",
+    cmap="Blues"
+)
+
+plt.title("Confusion Matrix")
+plt.xlabel("Predicted Label")
+plt.ylabel("True Label")
+plt.show()
