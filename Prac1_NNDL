@@ -1,0 +1,37 @@
+import numpy as np
+
+# 1. Vector Addition
+# Define two 1D arrays (vectors) of the same shape
+vec_a = np.array([1, 2, 3])
+vec_b = np.array([4, 5, 6])
+
+# Perform element-wise addition
+vec_sum = vec_a + vec_b
+
+print("-- Vector Addition --")
+print("Vector A :", vec_a)
+print("Vector B :", vec_b)
+print("Sum (A+B):", vec_sum)
+print()
+
+
+# 2. Matrix Multiplication
+# Define a 2x3 matrix (matrix X) and a 3x2 matrix (matrix Y)
+matrix_x = np.array([
+    [1, 2, 3],
+    [4, 5, 6]
+])
+
+matrix_y = np.array([
+    [7, 8],
+    [9, 10],
+    [11, 12]
+])
+
+# Perform matrix multiplication
+matrix_mul = np.dot(matrix_x, matrix_y)
+
+print("-- Matrix Multiplication --")
+print("Matrix X (2x3):\n", matrix_x)
+print("Matrix Y (3x2):\n", matrix_y)
+print("Matrix X * Y (2x2):\n", matrix_mul)
